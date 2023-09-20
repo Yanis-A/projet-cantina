@@ -10,7 +10,6 @@ import RecipeDuration from "../components/RecipeDuration";
 import RecipeCardButtons from "../components/RecipeCardButtons";
 
 function DetailsRecipe() {
-  // Vérification de l'id récupéré
   const { id } = useParams();
   const idAsNumber = Number(id);
 
