@@ -1,62 +1,84 @@
 import PropTypes from "prop-types";
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setOpenedPopoverId } from "../services/slices";
+import ActionButtons from "./ActionButtons";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import Modal from 'react-bootstrap/Modal';
-function RecipeCardButtons({ id, title, tooltipPosition }) {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const navigate = useNavigate();
+import { Popover } from "react-bootstrap";
+function RecipeCardButtons({
+  id,
+  title,
+  isOnPopover,
+  isVertical,
+  tooltipPosition,
+}) {
+  const dispatch = useDispatch();
+  const openedPopoverId = useSelector((state) => state.globalProps.openedPopoverId);
+  const [showPopover, setShowPopover] = useState(false);
+
+  useEffect(() => {
+    if (openedPopoverId !== id) {
+      setShowPopover(false);
+    }
+  }, [openedPopoverId, id]);
+
+  const togglePopover = () => {
+    if (openedPopoverId === null) {
+      setShowPopover(true);
+      dispatch(setOpenedPopoverId(id));
+    }
+    else if (openedPopoverId === id) {
+      setShowPopover(false);
+      dispatch(setOpenedPopoverId(null));
+    } else if (openedPopoverId !== id) {
+      setShowPopover(true);
+      dispatch(setOpenedPopoverId(id));
+    }
+    // setShowPopover(!showPopover);
+  };
+  const popover = (
+    <Popover id="popover-basic" style={{zIndex: "1000"}}>
+      <Popover.Body>
+        <ActionButtons
+          id={id}
+          title={title}
+          isVertical={isVertical}
+          tooltipPosition={tooltipPosition}
+        />
+      </Popover.Body>
+    </Popover>
+  );
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center">
+    <div
+      className={
+        "d-flex justify-content-center align-items-center" +
+        (isVertical ? " flex-column mt-2" : " flex-row")
+      }
+    >
+      {isOnPopover ? (
       <OverlayTrigger
-        placement={tooltipPosition || "top"}
-        overlay={<Tooltip id={`tooltip-${tooltipPosition || "top"}`}>Modifier la recette</Tooltip>}
-      >
-        <button
-          className="btn btn-light btn-sm"
-          onClick={() => navigate(`/recipe/edit/${id}`)}
-        >
-          <i className="bi bi-pencil-fill"></i>
-        </button>
-      </OverlayTrigger>
-      <OverlayTrigger
-        placement={tooltipPosition || "top"}
-        overlay={<Tooltip id={`tooltip-${tooltipPosition || "top"}`}>Supprimer la recette</Tooltip>}
+        trigger="click"
+        placement="left"
+        overlay={popover}
+        show={showPopover}
       >
         <button
           type="button"
-          className="btn btn-danger btn-sm mt-1"
-          onClick={handleShow}
+          className="btn text-white"
+          onClick={togglePopover}
+          style={{ backgroundColor: "transparent" }}
         >
-          <i className="bi bi-trash-fill"></i>
+          <i className="bi bi-three-dots-vertical"></i>
         </button>
       </OverlayTrigger>
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Suppression</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Veuillez confirmer la suppression de la recette &quot;{title}&quot;</Modal.Body>
-        <Modal.Footer>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            data-bs-dismiss="modal"
-            onClick={handleClose}
-          >
-            Annuler
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={() => alert("Suppression de la recette")}
-          >
-            Supprimer
-          </button>
-        </Modal.Footer>
-      </Modal>
+      ) : (
+      <ActionButtons
+        id={id}
+        title={title}
+        isVertical={isVertical}
+        tooltipPosition={tooltipPosition}
+      />
+      )}
     </div>
   );
 }
@@ -64,6 +86,8 @@ function RecipeCardButtons({ id, title, tooltipPosition }) {
 RecipeCardButtons.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  isOnPopover: PropTypes.bool.isRequired,
+  isVertical: PropTypes.bool.isRequired,
   tooltipPosition: PropTypes.string,
 };
 

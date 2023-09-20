@@ -12,9 +12,18 @@ function RecipeCardAside({ recipe }) {
     >
       <RecipeLevel level={recipe.niveau} tooltipPosition="left" />
       <RecipeQuantity quantity={recipe.personnes} tooltipPosition="left" />
-      <RecipeDuration duration={recipe.tempsPreparation} tooltipPosition="left" />
-      <div className="py-5">
-        <RecipeCardButtons id={recipe.id} title={recipe.titre} tooltipPosition="left"/>
+      <RecipeDuration
+        duration={recipe.tempsPreparation}
+        tooltipPosition="left"
+      />
+      <div className="mt-2">
+        <RecipeCardButtons
+          id={recipe.id}
+          title={recipe.titre}
+          isOnPopover={true}
+          isVertical={false}
+          tooltipPosition="bottom"
+        />
       </div>
     </div>
   );

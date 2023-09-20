@@ -1,4 +1,4 @@
-// Capitzalize string
+// Mettre une majuscule au début d'un mot
 export function capitalizeFirstLetter(string) {
   if (typeof string !== "string" || string.length === 0) {
     return string;
@@ -6,7 +6,7 @@ export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// Convert to hours if minutes > 60
+// Convertir en heures et minutes si minutes > 60
 export function convertToHours(minutes) {
   if (minutes > 60) {
     return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
@@ -14,7 +14,7 @@ export function convertToHours(minutes) {
   return `${minutes}m`;
 }
 
-// Return an ajective for the complexity of the recipe
+// Renvoie la difficulté en fonction du niveau
 export function getComplexity(level) {
   switch (level) {
     case "padawan":

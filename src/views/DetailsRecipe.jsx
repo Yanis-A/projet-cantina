@@ -13,12 +13,8 @@ function DetailsRecipe() {
   const { id } = useParams();
   const idAsNumber = Number(id);
 
-  console.log("id", idAsNumber);
-
   const totalRecipes = useSelector((state) => state.globalProps.totalRecipes);
   const { recipe, loading, error } = useRecipe(idAsNumber);
-
-  console.log("tot", totalRecipes);
 
   if (
     isNaN(idAsNumber) ||
@@ -65,6 +61,8 @@ function DetailsRecipe() {
               id={recipe.id}
               title={recipe.titre}
               tooltipPosition="left"
+              isVertical={true}
+              isOnPopover={false}
             />
           </div>
           <h1>{recipe.titre}</h1>

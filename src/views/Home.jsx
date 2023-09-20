@@ -1,9 +1,16 @@
 import RecipeCard from "../components/RecipeCard";
 import { useSelector } from "react-redux";
 // import Search from "../components/Search";
+import { useEffect } from "react";
+import { setOpenedPopoverId } from "../services/slices";
+import { useDispatch } from "react-redux";
 
 function Home() {
+  const dispatch = useDispatch();
   const recipes = useSelector((state) => state.globalProps.recipes);
+  useEffect(() => {
+    dispatch(setOpenedPopoverId(null));
+  }, [dispatch]);
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center text-center">
       <h1>Bienvenue!</h1>

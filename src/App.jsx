@@ -2,10 +2,10 @@ import "./App.css";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer";
 import AppRoutes from "./router/Routes.jsx";
+import Error from "./components/Error";
 import useRecipes from "./hooks/useRecipes";
 import { setRecipes, setTotalRecipes } from "./services/slices";
 import { useDispatch } from "react-redux";
-import Error from "./components/Error";
 
 function App() {
   const dispatch = useDispatch();

@@ -6,7 +6,11 @@ const store = configureStore({
     globalProps: globalPropsReducer,
   },
   preloadedState: {
-    globalProps: {},
+    globalProps: {
+      recipes: [],
+      totalRecipes: 0,
+      openedPopoverId: null,
+    },
   },
 });
 
