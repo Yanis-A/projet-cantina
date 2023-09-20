@@ -25,15 +25,3 @@ export function getComplexity(level) {
       return "difficile";
   }
 }
-
-// Activates tooltips after a delay
-export function activateTooltips() {
-  setTimeout(() => {
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-    const tooltipList = [...tooltipTriggerList].map(
-      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-    );
-  }, 2000);
-}

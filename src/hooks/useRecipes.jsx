@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { fetchRecipes } from "../services/service";
+import { useDispatch } from "react-redux";
 
 function useRecipes() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchRecipes()
@@ -16,7 +18,7 @@ function useRecipes() {
         setError(error);
         setLoading(false);
       });
-  }, []);
+  }, [dispatch]);
 
   return { recipes, loading, error };
 }

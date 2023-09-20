@@ -1,12 +1,13 @@
 @import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 /* Global CSS edits */
 ::selection {
-  background-color: #d1200986;
+  background-color: #cf2610a3;
 }
 
 #root {
   min-height: 100vh;
-  background-color: #e4d8cc;
+  background-color: #151414;
+  color: white;
 }
 
 *{

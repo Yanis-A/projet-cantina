@@ -1,22 +1,9 @@
-import useRecipes from "../hooks/useRecipes";
 import RecipeCard from "../components/RecipeCard";
-import Error from "../components/Error";
+import { useSelector } from "react-redux";
 // import Search from "../components/Search";
 
 function Home() {
-  const { recipes, loading, error } = useRecipes();
-
-  if (loading)
-    return (
-      <div className="h-100 d-flex justify-content-center align-items-center text-center">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
-
-  if (error) return <Error err={error.message} />;
-
+  const recipes = useSelector((state) => state.globalProps.recipes);
   return (
     <div className="container-fluid d-flex flex-column justify-content-center align-items-center text-center">
       <h1>Bienvenue!</h1>

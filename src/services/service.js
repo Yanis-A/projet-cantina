@@ -9,7 +9,7 @@ export async function fetchRecipes() {
 }
 // Récupérer une recette par son id
 export async function fetchRecipe(id) {
-  const response = await axios.get(`${BASE_URL}/recipes/${id}`);
+  const response = await axios.get(`${BASE_URL}/recipe/${id}`);
   return response.data;
 }
 // Créer une recette
