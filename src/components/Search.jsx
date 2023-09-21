@@ -68,8 +68,14 @@ function Search() {
   const resetMaxDuration = () => {
     dispatch(setSearchMaxDuration(null));
   };
-  
 
+  function preventNonNumericalInput(e) {
+    // Empêcher la saisie de caractères non numériques
+    if (!/^[0-9]*$/.test(e.key) && e.key !== "Backspace") {
+      e.preventDefault();
+    }
+  }
+  
   return (
     <div className="d-flex flex-column w-75">
       <div
@@ -178,7 +184,7 @@ function Search() {
                   placeholder="Min"
                   min={1}
                   max={11}
-                  onKeyDown={(e) => e.preventDefault()}
+                  onKeyDown={preventNonNumericalInput}
                   onChange={handlePortionsMinChange}
                 />
                 <p className="mb-0 mx-2">et</p>
@@ -189,7 +195,7 @@ function Search() {
                   placeholder="Max"
                   min={2}
                   max={12}
-                  onKeyDown={(e) => e.preventDefault()}
+                  onKeyDown={preventNonNumericalInput}
                   onChange={handlePortionsMaxChange}
                 />
                 <p className="mb-0 ms-2">personnes</p>
@@ -221,7 +227,7 @@ function Search() {
                   placeholder="Min"
                   min={1}
                   max={180}
-                  onKeyDown={(e) => e.preventDefault()}
+                  onKeyDown={preventNonNumericalInput}
                   onChange={handleMaxDurationChange}
                 />
                 <OverlayTrigger
