@@ -10,6 +10,12 @@ const store = configureStore({
       recipes: [],
       totalRecipes: 0,
       openedPopoverId: null,
+      searchFields: {
+        title: "",
+        portions: { min: null, max: null },
+        level: [],
+        maxDuration: null,
+      },
     },
   },
 });

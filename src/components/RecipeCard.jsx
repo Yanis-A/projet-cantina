@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function RecipeCard({ recipe }) {
   const navigate = useNavigate();
   return (
-    <div className="col-10 col-md-6 col-lg-3 d-flex align-items-center justify-content-center">
+    <div className="col-10 col-sm-6 col-lg-3 d-flex align-items-center justify-content-center">
       <div
         className={
           "card text-bg-dark text-start my-1 position-relative " +

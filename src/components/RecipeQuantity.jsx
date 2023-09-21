@@ -7,7 +7,7 @@ function RecipeQuantity({ quantity, tooltipPosition }) {
     <OverlayTrigger
         placement={tooltipPosition || "top"}
         overlay={
-          <Tooltip id={`tooltip-${tooltipPosition || "top"}`}>Pour {quantity} personnes</Tooltip>
+          <Tooltip id={`tooltip-${tooltipPosition || "top"}`}>Pour {quantity} {quantity === 1 ? "personne" : "personnes"}</Tooltip>
         }
       >
         <div className="mt-1">

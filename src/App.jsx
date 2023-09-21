@@ -6,12 +6,17 @@ import Error from "./components/Error";
 import useRecipes from "./hooks/useRecipes";
 import { setRecipes, setTotalRecipes } from "./services/slices";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
   const { recipes, loading, error } = useRecipes();
-  dispatch(setRecipes(recipes));
-  dispatch(setTotalRecipes(recipes.length));
+  useEffect(() => {
+    if (recipes) {
+      dispatch(setRecipes(recipes));
+      dispatch(setTotalRecipes(recipes.length));
+    }
+  }, [recipes, dispatch]);
   if (loading)
     return (
       <div style={{ minHeight: "100vh" }}>

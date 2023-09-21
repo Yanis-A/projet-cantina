@@ -103,7 +103,7 @@ function DetailsRecipe() {
               <h3>Étapes</h3>
               <ol>
                 {recipe.etapes.map((etape, index) => (
-                  <li key={index}>{etape}</li>
+                  <li key={index} className="mb-3">{etape}</li>
                 ))}
               </ol>
             </div>
