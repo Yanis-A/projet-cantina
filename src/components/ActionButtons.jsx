@@ -4,11 +4,40 @@ import { useNavigate } from "react-router-dom";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Modal from "react-bootstrap/Modal";
+import { deleteRecipe, fetchRecipes } from "../services/service";
+import { useDispatch } from "react-redux";
+import { setBanner, setRecipes } from "../services/slices";
 function ActionButtons({ id, title, isVertical, tooltipPosition }) {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
+
+  function onClickDelete() {
+    deleteRecipe(id)
+      .then((data) => {
+        handleClose();
+        dispatch(setBanner({ type: "success", message: data.message, uuid: crypto.randomUUID() }));
+        fetchRecipes()
+          .then((recipes) => {
+            dispatch(setRecipes(recipes));
+          })
+          .catch((error) => {
+            dispatch(setBanner({ type: "danger", message: error.message, uuid: crypto.randomUUID() }));
+          });
+  
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+      .catch((error) => {
+        handleClose();
+        dispatch(setBanner({ type: "danger", message: error.message, uuid: crypto.randomUUID() }));
+      });
+  }
+  
+
   return (
     <>
       <OverlayTrigger
@@ -67,7 +96,7 @@ function ActionButtons({ id, title, isVertical, tooltipPosition }) {
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => alert("Suppression de la recette")}
+            onClick={onClickDelete}
           >
             Supprimer
           </button>

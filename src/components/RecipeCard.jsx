@@ -4,15 +4,24 @@ import RecipeCardAside from "./RecipeCardAside";
 import { useNavigate } from "react-router-dom";
 function RecipeCard({ recipe }) {
   const navigate = useNavigate();
+  const cardStyle = {
+    backgroundImage: `url(${recipe.photo || "https://via.placeholder.com/600x800?text=???"})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    height: "420px",
+    width: "100%",
+    overflow: "hidden",
+  };
   return (
     <div className="col-10 col-sm-6 col-lg-3 d-flex align-items-center justify-content-center">
       <div
         className={
-          "card text-bg-dark text-start my-1 position-relative " +
+          "card text-bg-dark text-start border border-light my-2 position-relative " +
           styles.card_custom
         }
+        style={cardStyle}
       >
-        <img src={recipe.photo || "https://via.placeholder.com/600x800?text=???"} className="card-img" alt="..." />
         <div className="card-img-overlay w-75" style={{ zIndex: 999 }}>
           <h5 className="card-title fw-bold">{recipe.titre}</h5>
           <p className="card-text">{recipe.description}</p>

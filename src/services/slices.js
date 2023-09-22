@@ -2,13 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   recipes: [],
-  totalRecipes: 0,
+  lastRecipe: 0,
   openedPopoverId: null,
   searchFields: {
     title: "",
     portions: { min: null, max: null },
     level: [],
     maxDuration: null,
+  },
+  banner: {
+    type: "",
+    message: "",
+    uuid: "",
   },
 };
 
@@ -19,8 +24,8 @@ const globalPropsSlice = createSlice({
     setRecipes: (state, action) => {
       state.recipes = action.payload;
     },
-    setTotalRecipes: (state, action) => {
-      state.totalRecipes = action.payload;
+    setLastRecipe: (state, action) => {
+      state.lastRecipe = action.payload;
     },
     setOpenedPopoverId: (state, action) => {
       state.openedPopoverId = action.payload;
@@ -46,9 +51,15 @@ const globalPropsSlice = createSlice({
     setSearchMaxDuration: (state, action) => {
       state.searchFields.maxDuration = action.payload;
     },
+    resetSearchFields: (state) => {
+      state.searchFields = initialState.searchFields;
+    },
+    setBanner: (state, action) => {
+      state.banner = action.payload;
+    },
   },
 });
 
-export const { setRecipes, setTotalRecipes, setOpenedPopoverId, setSearchFields, setSearchTitle, setSearchPortionsMin, setSearchPortionsMax, addSearchLevel, removeSearchLevel, setSearchMaxDuration } = globalPropsSlice.actions;
+export const { setRecipes, setLastRecipe, setOpenedPopoverId, setSearchFields, setSearchTitle, setSearchPortionsMin, setSearchPortionsMax, addSearchLevel, removeSearchLevel, setSearchMaxDuration, resetSearchFields, setBanner } = globalPropsSlice.actions;
 
 export default globalPropsSlice.reducer;

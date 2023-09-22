@@ -8,13 +8,18 @@ const store = configureStore({
   preloadedState: {
     globalProps: {
       recipes: [],
-      totalRecipes: 0,
+      lastRecipe: 0,
       openedPopoverId: null,
       searchFields: {
         title: "",
         portions: { min: null, max: null },
         level: [],
         maxDuration: null,
+      },
+      banner: {
+        type: "",
+        message: "",
+        uuid: "",
       },
     },
   },
