@@ -6,15 +6,19 @@ function Banner({ type, message, uuid }) {
 
   useEffect(() => {
     setShowBanner(true);
-
+    
     const timerId = setTimeout(() => {
       setShowBanner(false);
     }, 4000);
-
+    
     return () => {
       clearTimeout(timerId);
     };
   }, [type, message, uuid]);
+
+  if (!type || !message || !uuid) {
+    return null;
+  }
 
   const handleClose = () => {
     setShowBanner(false);

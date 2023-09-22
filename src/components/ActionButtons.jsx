@@ -29,7 +29,7 @@ function ActionButtons({ id, title, isVertical, tooltipPosition }) {
   
         setTimeout(() => {
           navigate("/");
-        }, 2000);
+        }, 500);
       })
       .catch((error) => {
         handleClose();

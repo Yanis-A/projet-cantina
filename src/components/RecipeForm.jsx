@@ -165,7 +165,7 @@ function RecipeForm({ recipe, onSave }) {
 
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 500);
     } catch (error) {
       console.error("Erreur lors de la sauvegarde :", error);
       dispatch(
@@ -272,7 +272,6 @@ function RecipeForm({ recipe, onSave }) {
                 }
                 className="form-control mr-2"
                 placeholder="Quantité"
-                required
               />
               <input
                 type="text"
