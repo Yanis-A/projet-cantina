@@ -43,25 +43,25 @@ function About() {
           </p>
           <ul>
             <li>
-              Chef Obi-Wok Nem-obi : Maître Jedi de la cuisine, il est connu
+              <strong>Chef Obi-Wok Nem-obi</strong> : Maître Jedi de la cuisine, il est connu
               pour sa sagesse culinaire et sa capacité à transformer les
               ingrédients les plus simples en plats exquis.
             </li>
             <li>
-              Princesse Riz au lait-ia : Une diplomate de la cuisine avec une
+            <strong>Princesse Riz au lait-ia</strong> : Une diplomate de la cuisine avec une
               préférence pour les desserts. Elle sait comment endormir les
               papilles gustatives de l&apos;Empire avec son charme sucré.
             </li>
             <li>
-              Han Soja : Le contrebandier de la cuisine, il sait comment
+            <strong>Han Soja</strong> : Le contrebandier de la cuisine, il sait comment
               concocter un plat délicieux avec des ingrédients limités.
             </li>
             <li>
-              Maître Iodé : Le maître des saveurs subtiles, il enseigne la
+            <strong>Maître Iodé</strong> : Le maître des saveurs subtiles, il enseigne la
               patience et l&apos;art de la préparation lente.
             </li>
             <li>
-              Luke Écaille-wok-er : Un jeune Jedi de la cuisine, il est connu
+            <strong>Luke Écaille-wok-er</strong> : Un jeune Jedi de la cuisine, il est connu
               pour ses compétences en friture et sa capacité à transformer les
               ingrédients les plus simples en plats exquis.
             </li>

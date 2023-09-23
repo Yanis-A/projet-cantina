@@ -48,8 +48,8 @@ function Banner({ type, message, uuid }) {
 
   return (
     <div
-      className={`alert alert-${type} alert-dismissible fade show position-fixed top-0 start-0 end-0 w-75 mx-auto mt-3 text-start`}
-      style={{ zIndex: 9999 }}
+      className={`alert alert-${type} alert-dismissible fade show position-fixed top-0 start-0 end-0 mx-auto mt-3 text-start`}
+      style={{ zIndex: 9999, width: "fit-content" }}
       role="alert"
     >
       <span className="me-2">

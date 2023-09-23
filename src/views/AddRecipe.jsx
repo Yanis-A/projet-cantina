@@ -19,7 +19,7 @@ function AddRecipe() {
             <h1 className="text-center">
               Création de la recette
               <br />
-              <strong>&quot;{createdRecipeTitle}&quot;</strong>
+              <strong className="fs-4">&quot;{createdRecipeTitle}&quot;</strong>
             </h1>
           ) : null}
           <RecipeForm onSave={createRecipe} />

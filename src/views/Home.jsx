@@ -72,13 +72,13 @@ function Home() {
     >
       {allRecipes.length !== 0 && (
         <>
-          <div className="position-fixed sticky-top top-0 end-0 me-4 mt-3 d-none d-sm-block">
+          <div className="position-fixed sticky-top top-0 end-0 me-4 mt-3 d-none d-md-block">
             <Link to="/recipe/add" className="btn btn-warning">
               <i className="bi bi-plus-lg me-1"></i>
               Créer une recette
             </Link>
           </div>
-          <div className="position-fixed sticky-top top-0 end-0 me-2 mt-3 d-block d-sm-none">
+          <div className="position-fixed sticky-top top-0 end-0 me-2 mt-3 d-block d-md-none">
             <OverlayTrigger
               placement="left"
               overlay={<Tooltip id="tooltip-left">Créer une recette</Tooltip>}
@@ -95,7 +95,7 @@ function Home() {
         Découvrez les recettes les plus savoureuses de Tatooine, à cuisiner chez
         vous.
       </p>
-      <Search />
+      {allRecipes.length !== 0 && <Search />}
       <hr className="w-75 border border-secondary" />
       <h2 className="mt-2">Nos recettes</h2>
       <div className="row d-flex justify-content-center my-4 w-100">
@@ -123,7 +123,7 @@ function Home() {
         {allRecipes.length === 0 && (
           <div className="d-flex flex-column justify-content-center align-items-center text-center">
             <h3 className="text-center mb-4">
-              Oh oh... Aucune recette à afficher pour l&apos;instant.
+              Aucune recette à afficher pour l&apos;instant.
             </h3>
             <p className="mb-4">Pourquoi ne pas en créer une, padawan?</p>
             <Link to="/recipe/add" className="btn btn-light">
