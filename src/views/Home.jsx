@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { setOpenedPopoverId, resetSearchFields } from "../services/slices";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { OverlayTrigger } from "react-bootstrap";
+import { Tooltip } from "react-bootstrap";
 
 function Home() {
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ function Home() {
   const resetSearchFieldsHandler = () => {
     dispatch(resetSearchFields());
   };
+
+  useEffect(() => {
+    document.title = "Bienvenue sur Saveurs de Tatooine !";
+  }, []);
 
   useEffect(() => {
     const updatedRecipes = allRecipes.filter((recipe) => {
@@ -60,7 +66,30 @@ function Home() {
   }, [dispatch]);
 
   return (
-    <div className="container-fluid d-flex flex-column justify-content-center align-items-center text-center" style={{minHeight: '60vh'}}>
+    <div
+      className="container-fluid d-flex flex-column justify-content-center align-items-center text-center"
+      style={{ minHeight: "60vh" }}
+    >
+      {allRecipes.length !== 0 && (
+        <>
+          <div className="position-fixed sticky-top top-0 end-0 me-4 mt-3 d-none d-sm-block">
+            <Link to="/recipe/add" className="btn btn-warning">
+              <i className="bi bi-plus-lg me-1"></i>
+              Créer une recette
+            </Link>
+          </div>
+          <div className="position-fixed sticky-top top-0 end-0 me-2 mt-3 d-block d-sm-none">
+            <OverlayTrigger
+              placement="left"
+              overlay={<Tooltip id="tooltip-left">Créer une recette</Tooltip>}
+            >
+              <Link to="/recipe/add" className="btn btn-warning">
+                <i className="bi bi-plus-lg"></i>
+              </Link>
+            </OverlayTrigger>
+          </div>
+        </>
+      )}
       <h1>Bienvenue!</h1>
       <p>
         Découvrez les recettes les plus savoureuses de Tatooine, à cuisiner chez
@@ -93,7 +122,9 @@ function Home() {
         )}
         {allRecipes.length === 0 && (
           <div className="d-flex flex-column justify-content-center align-items-center text-center">
-            <h3 className="text-center mb-4">Oh oh... Aucune recette à afficher.</h3>
+            <h3 className="text-center mb-4">
+              Oh oh... Aucune recette à afficher pour l&apos;instant.
+            </h3>
             <p className="mb-4">Pourquoi ne pas en créer une, padawan?</p>
             <Link to="/recipe/add" className="btn btn-light">
               Créer une recette

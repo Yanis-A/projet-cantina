@@ -2,10 +2,11 @@ import PropTypes from "prop-types";
 import styles from "../styles/RecipeCard.module.css";
 import RecipeCardAside from "./RecipeCardAside";
 import { useNavigate } from "react-router-dom";
+import default_image from "../assets/default_image.png";
 function RecipeCard({ recipe }) {
   const navigate = useNavigate();
   const cardStyle = {
-    backgroundImage: `url(${recipe.photo || "https://via.placeholder.com/600x800?text=???"})`,
+    backgroundImage: `url(${recipe.photo || default_image})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",

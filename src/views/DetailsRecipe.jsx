@@ -3,41 +3,48 @@ import { useEffect, useState } from "react";
 import NotFound from "./NotFound";
 import useRecipe from "../hooks/useRecipe";
 import { useDispatch, useSelector } from "react-redux";
-// Elements
 import RecipeLevel from "../components/RecipeLevel";
 import RecipeQuantity from "../components/RecipeQuantity";
 import RecipeDuration from "../components/RecipeDuration";
 import RecipeCardButtons from "../components/RecipeCardButtons";
 import { setBanner } from "../services/slices";
+import default_image from "../assets/default_image.png";
+import { isValidId } from "../services/utils";
 
 function DetailsRecipe() {
-  const { id } = useParams();
+  const id = parseInt(useParams().id, 10);
   const dispatch = useDispatch();
-  const idAsNumber = Number(id);
+  const [isComponentMounted, setIsComponentMounted] = useState(false);
   const [invalidId, setInvalidId] = useState(false);
-
+  const recipes = useSelector((state) => state.globalProps.recipes);
   const lastRecipe = useSelector((state) => state.globalProps.lastRecipe);
-  const { recipe, loading, error } = useRecipe(idAsNumber);
+  const { recipe, loading, error } = useRecipe(id);
 
   useEffect(() => {
-    if (
-      isNaN(idAsNumber) ||
-      idAsNumber < 1 ||
-      idAsNumber > lastRecipe ||
-      idAsNumber % 1 !== 0 ||
-      !idAsNumber
-    ) {
-      setInvalidId(true);
-    } else if (error) {
-      dispatch(
-        setBanner({
-          type: "danger",
-          message: error.message,
-          uuid: crypto.randomUUID(),
-        })
-      );
+    setIsComponentMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (recipe) {
+      document.title = `${recipe.titre} - Saveurs de Tatooine`;
     }
-  }, [idAsNumber, lastRecipe, error, dispatch]);
+  }, [recipe]);
+
+  useEffect(() => {
+    if (isComponentMounted) {
+      if (!isValidId(id, lastRecipe, recipes)) {
+        setInvalidId(true);
+      } else if (error) {
+        dispatch(
+          setBanner({
+            type: "danger",
+            message: error.message,
+            uuid: crypto.randomUUID(),
+          })
+        );
+      }
+    }
+  }, [id, recipes, lastRecipe, error, dispatch, isComponentMounted]);
 
   if (invalidId) {
     return <NotFound />;
@@ -57,7 +64,7 @@ function DetailsRecipe() {
           style={{
             width: "100%",
             height: "100%",
-            backgroundImage: `url(${recipe.photo})`,
+            backgroundImage: `url(${recipe.photo || default_image})`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
             opacity: "0.1",
@@ -67,7 +74,7 @@ function DetailsRecipe() {
         <div className="row">
           <div className="col-10 col-md-4 offset-1 offset-md-0 d-flex align-items-start justify-content-center">
             <img
-              src={recipe.photo}
+              src={recipe.photo || default_image}
               alt={recipe.titre}
               style={{ width: "100%", maxWidth: "300px" }}
               className="img-fluid rounded shadow-sm mt-2"
@@ -108,8 +115,12 @@ function DetailsRecipe() {
                 <ul>
                   {recipe.ingredients.map((ingredient, index) => (
                     <li key={index}>
-                      <span className="fw-bold">{ingredient[0]}</span>
-                      &nbsp;
+                      {ingredient[0] && (
+                        <>
+                          <span className="fw-bold">{ingredient[0]}</span>
+                          <span>&nbsp;</span>
+                        </>
+                      )}
                       <span>{ingredient[1]}</span>
                     </li>
                   ))}

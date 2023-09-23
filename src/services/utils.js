@@ -25,3 +25,15 @@ export function getComplexity(level) {
       return "difficile";
   }
 }
+
+// Vérifie si l'id est valide, et si le composant peut être affiché
+export function isValidId(id, lastRecipe, recipes) {
+  return (
+    !isNaN(id) &&
+    id >= 1 &&
+    id <= lastRecipe &&
+    id % 1 === 0 &&
+    id !== null &&
+    recipes.some((recipe) => recipe.id === id)
+  );
+}

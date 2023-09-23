@@ -18,25 +18,42 @@ function ActionButtons({ id, title, isVertical, tooltipPosition }) {
     deleteRecipe(id)
       .then((data) => {
         handleClose();
-        dispatch(setBanner({ type: "success", message: data.message, uuid: crypto.randomUUID() }));
+        dispatch(
+          setBanner({
+            type: "success",
+            message: data.message,
+            uuid: crypto.randomUUID(),
+          })
+        );
         fetchRecipes()
           .then((recipes) => {
             dispatch(setRecipes(recipes));
           })
           .catch((error) => {
-            dispatch(setBanner({ type: "danger", message: error.message, uuid: crypto.randomUUID() }));
+            dispatch(
+              setBanner({
+                type: "danger",
+                message: error.message,
+                uuid: crypto.randomUUID(),
+              })
+            );
           });
-  
+
         setTimeout(() => {
           navigate("/");
         }, 500);
       })
       .catch((error) => {
         handleClose();
-        dispatch(setBanner({ type: "danger", message: error.message, uuid: crypto.randomUUID() }));
+        dispatch(
+          setBanner({
+            type: "danger",
+            message: error.message,
+            uuid: crypto.randomUUID(),
+          })
+        );
       });
   }
-  
 
   return (
     <>

@@ -27,7 +27,9 @@ function RecipeLevel({ level, tooltipPosition }) {
     <OverlayTrigger
       placement={tooltipPosition || "top"}
       overlay={
-        <Tooltip id={`tooltip-${tooltipPosition || "top"}`}>Recette {getComplexity(level)}</Tooltip>
+        <Tooltip id={`tooltip-${tooltipPosition || "top"}`}>
+          Recette {getComplexity(level)}
+        </Tooltip>
       }
     >
       <div className="d-flex flex-column justify-content-center align-items-center">

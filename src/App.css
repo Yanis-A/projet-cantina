@@ -1,4 +1,4 @@
-@import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 /* Global CSS edits */
 ::selection {
   background-color: #fee12391;
@@ -10,7 +10,7 @@
   color: white;
 }
 
-*{
+* {
   scroll-behavior: smooth;
   scrollbar-width: thin;
 }

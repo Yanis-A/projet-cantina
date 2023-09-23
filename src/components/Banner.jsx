@@ -6,11 +6,11 @@ function Banner({ type, message, uuid }) {
 
   useEffect(() => {
     setShowBanner(true);
-    
+
     const timerId = setTimeout(() => {
       setShowBanner(false);
     }, 4000);
-    
+
     return () => {
       clearTimeout(timerId);
     };
@@ -70,7 +70,7 @@ function Banner({ type, message, uuid }) {
 Banner.propTypes = {
   type: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  uuid: PropTypes.string.isRequired, // Propriété UUID pour différencier les appels
+  uuid: PropTypes.string.isRequired,
 };
 
 export default Banner;

@@ -6,29 +6,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBanner } from "../services/slices";
 import RecipeForm from "../components/RecipeForm";
 import { editRecipe } from "../services/service";
+import { isValidId } from "../services/utils";
 
 function EditRecipe() {
   const id = parseInt(useParams().id, 10);
   const dispatch = useDispatch();
   const [isComponentMounted, setIsComponentMounted] = useState(false);
   const [invalidId, setInvalidId] = useState(false);
+  const recipes = useSelector((state) => state.globalProps.recipes);
   const lastRecipe = useSelector((state) => state.globalProps.lastRecipe);
   const { recipe, loading, error } = useRecipe(id);
-
-  // useEffect(() => {
-  //   if (recipe) {
-  //     document.title = `Modifier la recette "${recipe.titre}" - Recettes de cuisine`;
-  //   }
-  // }
-  // , [recipe]);
 
   useEffect(() => {
     setIsComponentMounted(true);
   }, []);
 
   useEffect(() => {
+    if (recipe) {
+      document.title = `Modifier la recette "${recipe.titre}" - Saveurs de Tatooine`;
+    }
+  }, [recipe]);
+
+  useEffect(() => {
     if (isComponentMounted) {
-      if (isNaN(id) || id < 1 || id > lastRecipe || id % 1 !== 0 || !id) {
+      if (!isValidId(id, lastRecipe, recipes)) {
         setInvalidId(true);
       } else if (error) {
         dispatch(
@@ -40,7 +41,7 @@ function EditRecipe() {
         );
       }
     }
-  }, [id, lastRecipe, error, dispatch, isComponentMounted]);
+  }, [id, recipes, lastRecipe, error, dispatch, isComponentMounted]);
 
   if (invalidId) {
     return <NotFound />;
@@ -54,9 +55,16 @@ function EditRecipe() {
     </div>
   ) : (
     !error && (
-      <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
-        <h1>Modification de la recette <strong>&quot;{recipe.titre}&quot;</strong></h1>
-        <RecipeForm recipe={recipe} onSave={editRecipe} />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-10 offset-1 d-flex flex-column align-items-center justify-content-center"></div>
+          <h1 className="text-center">
+            Modification de la recette
+            <br />
+            <strong>&quot;{recipe.titre}&quot;</strong>
+          </h1>
+          <RecipeForm recipe={recipe} onSave={editRecipe} />
+        </div>
       </div>
     )
   );

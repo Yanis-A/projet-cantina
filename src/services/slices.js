@@ -15,6 +15,7 @@ const initialState = {
     message: "",
     uuid: "",
   },
+  createdRecipeTitle: "",
 };
 
 const globalPropsSlice = createSlice({
@@ -46,7 +47,9 @@ const globalPropsSlice = createSlice({
       state.searchFields.level.push(action.payload);
     },
     removeSearchLevel: (state, action) => {
-      state.searchFields.level = state.searchFields.level.filter((level) => level !== action.payload);
+      state.searchFields.level = state.searchFields.level.filter(
+        (level) => level !== action.payload
+      );
     },
     setSearchMaxDuration: (state, action) => {
       state.searchFields.maxDuration = action.payload;
@@ -57,9 +60,26 @@ const globalPropsSlice = createSlice({
     setBanner: (state, action) => {
       state.banner = action.payload;
     },
+    setCreatedRecipeTitle: (state, action) => {
+      state.createdRecipeTitle = action.payload;
+    },
   },
 });
 
-export const { setRecipes, setLastRecipe, setOpenedPopoverId, setSearchFields, setSearchTitle, setSearchPortionsMin, setSearchPortionsMax, addSearchLevel, removeSearchLevel, setSearchMaxDuration, resetSearchFields, setBanner } = globalPropsSlice.actions;
+export const {
+  setRecipes,
+  setLastRecipe,
+  setOpenedPopoverId,
+  setSearchFields,
+  setSearchTitle,
+  setSearchPortionsMin,
+  setSearchPortionsMax,
+  addSearchLevel,
+  removeSearchLevel,
+  setSearchMaxDuration,
+  resetSearchFields,
+  setBanner,
+  setCreatedRecipeTitle,
+} = globalPropsSlice.actions;
 
 export default globalPropsSlice.reducer;

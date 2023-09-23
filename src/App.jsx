@@ -12,25 +12,36 @@ function App() {
   const dispatch = useDispatch();
   const { recipes, loading, error } = useRecipes();
   const bannerType = useSelector((state) => state.globalProps.banner.type);
-  const bannerMessage = useSelector((state) => state.globalProps.banner.message);
+  const bannerMessage = useSelector(
+    (state) => state.globalProps.banner.message
+  );
   const bannerUuid = useSelector((state) => state.globalProps.banner.uuid);
 
   useEffect(() => {
     if (recipes) {
       dispatch(setRecipes(recipes));
-      const lastId = recipes.reduce((maxId, recipe) => Math.max(maxId, recipe.id), 0);
+      const lastId = recipes.reduce(
+        (maxId, recipe) => Math.max(maxId, recipe.id),
+        0
+      );
       dispatch(setLastRecipe(lastId));
     }
   }, [recipes, dispatch]);
 
   useEffect(() => {
     if (error) {
-      dispatch(setBanner({ type: "danger", message: error.message, uuid: crypto.randomUUID() }));
+      dispatch(
+        setBanner({
+          type: "danger",
+          message: error.message,
+          uuid: crypto.randomUUID(),
+        })
+      );
     }
   }, [error, dispatch]);
 
   return (
-    <div style={{ minHeight: "100vh" }}>
+    <div className="position-relative" style={{ minHeight: "100vh" }}>
       <Banner type={bannerType} message={bannerMessage} uuid={bannerUuid} />
       <Header />
       {loading ? (

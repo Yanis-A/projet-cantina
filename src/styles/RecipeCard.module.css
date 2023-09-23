@@ -2,7 +2,8 @@
   max-width: 355px;
 }
 
-.card_custom::before, .card_custom::after {
+.card_custom::before,
+.card_custom::after {
   content: "";
   position: absolute;
   left: 0;
@@ -20,4 +21,3 @@
   bottom: 0;
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.85));
 }
-

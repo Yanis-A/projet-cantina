@@ -14,7 +14,7 @@ export async function fetchRecipe(id) {
 }
 // Créer une recette
 export async function createRecipe(recipe) {
-  const response = await axios.post(`${BASE_URL}/recipe`, recipe);
+  const response = await axios.post(`${BASE_URL}/recipes`, recipe);
   return response.data;
 }
 // Modifier une recette

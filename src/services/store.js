@@ -21,6 +21,7 @@ const store = configureStore({
         message: "",
         uuid: "",
       },
+      createdrecipeTitle: "",
     },
   },
 });

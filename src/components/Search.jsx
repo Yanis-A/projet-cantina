@@ -20,12 +20,6 @@ function Search() {
     setIsVisible(!isVisible);
   };
 
-  // Récupération des champs de recherche
-  // const searchFields = useSelector((state) => state.globalProps.searchFields);
-  // useEffect(() => {
-  //   console.log(searchFields);
-  // }, [searchFields]);
-
   // Gestion des champs de recherche
   const title = useSelector((state) => state.globalProps.searchFields.title);
   const portionsMin = useSelector(
@@ -96,13 +90,17 @@ function Search() {
   return (
     <div className="d-flex flex-column w-75">
       <div
-        title={`${isVisible ? 'Masquer' : 'Afficher'} le formulaire de recherche`}
+        title={`${
+          isVisible ? "Masquer" : "Afficher"
+        } le formulaire de recherche`}
         className="d-flex flex-row align-items-center justify-content-center mb-3"
         style={{ cursor: "pointer" }}
       >
         <button
           type="button"
-          className={"text-light btn fs-bold fs-5 m-0" + (isVisible ? " active" : "")}
+          className={
+            "text-light btn fs-bold fs-5 m-0" + (isVisible ? " active" : "")
+          }
           onClick={toggleVisibility}
           data-bs-toggle="collapse"
           data-bs-target="#searchForm"

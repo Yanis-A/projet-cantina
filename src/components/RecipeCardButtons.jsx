@@ -13,7 +13,9 @@ function RecipeCardButtons({
   tooltipPosition,
 }) {
   const dispatch = useDispatch();
-  const openedPopoverId = useSelector((state) => state.globalProps.openedPopoverId);
+  const openedPopoverId = useSelector(
+    (state) => state.globalProps.openedPopoverId
+  );
   const [showPopover, setShowPopover] = useState(false);
 
   useEffect(() => {
@@ -26,18 +28,16 @@ function RecipeCardButtons({
     if (openedPopoverId === null) {
       setShowPopover(true);
       dispatch(setOpenedPopoverId(id));
-    }
-    else if (openedPopoverId === id) {
+    } else if (openedPopoverId === id) {
       setShowPopover(false);
       dispatch(setOpenedPopoverId(null));
     } else if (openedPopoverId !== id) {
       setShowPopover(true);
       dispatch(setOpenedPopoverId(id));
     }
-    // setShowPopover(!showPopover);
   };
   const popover = (
-    <Popover id="popover-basic" style={{zIndex: "1000"}}>
+    <Popover id="popover-basic" style={{ zIndex: "1000" }}>
       <Popover.Body>
         <ActionButtons
           id={id}
@@ -56,28 +56,28 @@ function RecipeCardButtons({
       }
     >
       {isOnPopover ? (
-      <OverlayTrigger
-        trigger="click"
-        placement="left"
-        overlay={popover}
-        show={showPopover}
-      >
-        <button
-          type="button"
-          className="btn text-white"
-          onClick={togglePopover}
-          style={{ backgroundColor: "transparent" }}
+        <OverlayTrigger
+          trigger="click"
+          placement="left"
+          overlay={popover}
+          show={showPopover}
         >
-          <i className="bi bi-three-dots-vertical"></i>
-        </button>
-      </OverlayTrigger>
+          <button
+            type="button"
+            className="btn text-white"
+            onClick={togglePopover}
+            style={{ backgroundColor: "transparent" }}
+          >
+            <i className="bi bi-three-dots-vertical"></i>
+          </button>
+        </OverlayTrigger>
       ) : (
-      <ActionButtons
-        id={id}
-        title={title}
-        isVertical={isVertical}
-        tooltipPosition={tooltipPosition}
-      />
+        <ActionButtons
+          id={id}
+          title={title}
+          isVertical={isVertical}
+          tooltipPosition={tooltipPosition}
+        />
       )}
     </div>
   );
