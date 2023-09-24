@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo_sdt_v3.png";
 import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [typePreventMessage, setTypePreventMessage] = useState("");
   const createdRecipeTitle = useSelector(
@@ -17,8 +18,8 @@ function Header() {
     const handleBeforeUnload = (e) => {
       if (
         window.location.pathname.includes("add") ||
-        window.location.pathname.includes("edit") &&
-        showConfirmationModal === false
+        (window.location.pathname.includes("edit") &&
+          showConfirmationModal === false)
       ) {
         e.preventDefault();
         e.returnValue = "";
@@ -52,7 +53,7 @@ function Header() {
 
   const handleConfirm = () => {
     setShowConfirmationModal(false);
-    window.location.href = "/";
+    navigate("/");
   };
 
   const handleCancel = () => {

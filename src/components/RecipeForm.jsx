@@ -221,6 +221,7 @@ function RecipeForm({ recipe, onSave }) {
             value={formData.titre}
             onChange={handleInputChange}
             className="form-control"
+            autoComplete="off"
             required
           />
           <div className="invalid-feedback">Ce champ est requis.</div>
@@ -236,6 +237,7 @@ function RecipeForm({ recipe, onSave }) {
             value={formData.description}
             onChange={handleInputChange}
             className="form-control"
+            autoComplete="off"
             required
           />
           <div className="invalid-feedback">Ce champ est requis.</div>
@@ -319,6 +321,7 @@ function RecipeForm({ recipe, onSave }) {
                     }
                     className="form-control"
                     placeholder="Qté."
+                    autoComplete="off"
                   />
                 </div>
                 <div className="col-7 pe-0">
@@ -333,6 +336,7 @@ function RecipeForm({ recipe, onSave }) {
                     }
                     className="form-control"
                     placeholder="Ingrédient"
+                    autoComplete="off"
                     required
                   />
                 </div>
@@ -377,6 +381,7 @@ function RecipeForm({ recipe, onSave }) {
                     value={etape}
                     onChange={(e) => handleEtapeChange(index, e.target.value)}
                     className="form-control"
+                    autoComplete="off"
                     required
                   />
                 </div>
@@ -419,6 +424,7 @@ function RecipeForm({ recipe, onSave }) {
             value={formData.photo}
             onChange={handleInputChange}
             className="form-control"
+            autoComplete="off"
           />
           {imageError && <p className="text-danger">{imageError}</p>}
         </div>
