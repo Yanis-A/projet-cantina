@@ -17,7 +17,8 @@ function Header() {
     const handleBeforeUnload = (e) => {
       if (
         window.location.pathname.includes("add") ||
-        window.location.pathname.includes("edit")
+        window.location.pathname.includes("edit") &&
+        showConfirmationModal === false
       ) {
         e.preventDefault();
         e.returnValue = "";
@@ -29,7 +30,7 @@ function Header() {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []);
+  }, [showConfirmationModal]);
 
   useEffect(() => {
     if (location.pathname.includes("add")) {
